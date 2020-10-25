@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.mycompany.testproj.TestMapper">
+
+
+    <select id="selectTestData" resultType="java.util.HashMap">
+        select * from test
+    </select>
+    <insert id="insertPassengerInfo">
+        INSERT INTO `mydb`.`seoul_trft_sttn_pssngr` (LINE_NM,STATION_NUM,STATION_NM,JAN_CNT,FAB_CNT,MAR_CNT,APR_CNT,MAY_CNT,JUN_CNT,JUL_CNT,AUG_CNT,SEP_CNT,OCT_CNT,NOV_CNT,DEC_CNT)
+        VALUES (#{list[0]},
+        #{list[1]},
+        #{list[2]},
+        #{list[3]},
+        #{list[4]},
+        #{list[5]},
+        #{list[6]},
+        #{list[7]},
+        #{list[8]},
+        #{list[9]},
+        #{list[10]},
+        #{list[11]},
+        #{list[12]},
+        #{list[13]},
+        #{list[14]}
+        )
+    </insert>
+
+    <select id="selectTopTenByDayAvg" resultType="java.util.HashMap">
+        SELECT STATION_NM, SUM(PSSNGR_CNT) DIV 365 AS TOT_CNT FROM (
+            SELECT STATION_NM, '1월'  AS MON_NM, JAN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '2월' AS MON_NM, FAB_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '3월' AS MON_NM, MAR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '4월' AS MON_NM, APR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '5월' AS MON_NM, MAY_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '6월' AS MON_NM, JUN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '7월' AS MON_NM, JUL_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '8월' AS MON_NM, AUG_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '9월' AS MON_NM, SEP_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '10월' AS MON_NM, OCT_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '11월' AS MON_NM, NOV_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '12월' AS MON_NM, DEC_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+        )A
+        GROUP BY STATION_NM
+        ORDER BY TOT_CNT DESC
+        LIMIT 10
+
+
+    </select>
+    <select id="selectLowestByMonAvg" resultType="java.util.HashMap">
+       SELECT STATION_NM, ROUND(AVG(PSSNGR_CNT),0) AS AVG_CNT FROM (
+            SELECT STATION_NM, '1월'  AS MON_NM, JAN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '2월' AS MON_NM, FAB_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '3월' AS MON_NM, MAR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '4월' AS MON_NM, APR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '5월' AS MON_NM, MAY_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '6월' AS MON_NM, JUN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '7월' AS MON_NM, JUL_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '8월' AS MON_NM, AUG_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '9월' AS MON_NM, SEP_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '10월' AS MON_NM, OCT_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '11월' AS MON_NM, NOV_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '12월' AS MON_NM, DEC_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+        )A
+        GROUP BY STATION_NM
+        ORDER BY AVG_CNT
+        LIMIT 1
+    </select>
+    <select id="selectDiffByMonNum" resultType="java.util.HashMap">
+        SELECT STATION_NM, MAX(PSSNGR_CNT)-MIN(PSSNGR_CNT) AS MAX_SUB_CNT FROM (
+            SELECT STATION_NM, '1월'  AS MON_NM, JAN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '2월' AS MON_NM, FAB_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '3월' AS MON_NM, MAR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '4월' AS MON_NM, APR_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '5월' AS MON_NM, MAY_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '6월' AS MON_NM, JUN_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '7월' AS MON_NM, JUL_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '8월' AS MON_NM, AUG_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '9월' AS MON_NM, SEP_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '10월' AS MON_NM, OCT_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '11월' AS MON_NM, NOV_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+            UNION ALL
+            SELECT STATION_NM, '12월' AS MON_NM, DEC_CNT AS PSSNGR_CNT FROM seoul_trft_sttn_pssngr
+        )A
+        GROUP BY STATION_NM
+        ORDER BY MAX_SUB_CNT DESC
+        LIMIT 1
+    </select>
+</mapper>
