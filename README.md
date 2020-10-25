@@ -10,7 +10,9 @@
 
 5. Maven이 모든 파일을 다운로드 받으면 서버를 실행합니다.
 
-6. 서버가 실행되면 localhost:8080/login/auth.do 로 접속합니다.
+6. 최상위경로/doc/schema.sql 파일 내 DB Create문을 실행하여 DB에 테이블을 생성합니다. (MySql)
+
+6. 테이블 생성 및 서버가 실행되면 localhost:8080/login/auth.do 로 접속합니다.
 
 7. 아이디와 패스워드는 다음과 같습니다.
    ID : nice
