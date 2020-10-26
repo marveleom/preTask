@@ -11,6 +11,7 @@
 	서울교통공사 승하차 순위 조건별 조회
 </h1>
 
+
 일평균 인원이 가장 많은 상위 10개의 역 명과 인원수 
 <input type="button" value="조회" name="btn1"><br><br>
 
@@ -60,7 +61,7 @@
 				type: "get",
 				url: "/selectDiffByMonNum",
 				success: function (response) {
-					var str = '<li>'+ response.STATION_NM  +'('+ response.MAX_SUB_CNT +')</li>';
+					var str = '<li>'+ response.STATION_NM  +'</li>';
 					$('.result').html(str);
 				}
 			});
