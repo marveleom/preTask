@@ -1,6 +1,7 @@
 # preTask
 
 [API 명세서 경로는 /doc 내 사전과제_API명세서.doc 입니다.]
+[Interceptor를 활용하여 API 인증을 구현하였습니다. 로그인 정보는 아래 설명에 포함되어 있습니다.]
 
 1. 최상위 경로에 있는 src폴더와 pom.xml, /doc 내 'utf8-서울교통공사_승하차인원_20191231.csv', 그리고 /sql 내 schema.sql 파일을 다운받습니다. 
    
