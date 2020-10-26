@@ -1,7 +1,8 @@
 # preTask
 
 1. 최상위 경로에 있는 src폴더와 pom.xml, /doc 내 'utf8-서울교통공사_승하차인원_20191231.csv', 그리고 /sql 내 schema.sql 파일을 다운받습니다. 
-
+   (API 명세서 경로는 /doc 내 사전과제_API명세서.doc 입니다.)
+   
 2. STS or Intellij 등의 IDE에서 메이븐 프로젝트를 생성합니다.
 
 3. 생성한 프로젝트 내의 src폴더와 pom.xml 파일을, 다운받은 src폴더와 pom.xml 파일로 덮어쓰기합니다.(교체)
