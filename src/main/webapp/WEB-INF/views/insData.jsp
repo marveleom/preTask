@@ -12,7 +12,6 @@
 </h1>
 
 
-
 <form method="POST" enctype="multipart/form-data" id="excelForm">
 	
 	<table>
@@ -27,6 +26,11 @@
 		</tr>
 	</table>
 </form>
+
+<br>
+바로 조회화면으로 이동하시려면 조회버튼을 누르세요(DB Insert를 이미 진행한 경우)
+<input type="button" value="조회" name="btn1"><br><br>
+
 
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script>
@@ -59,6 +63,11 @@
 
 
 		});
+
+		$('[name="btn1"]').on('click', function() {
+			location.href ="/selectMenu.do";
+		});
+
 	});
 </script>
 </body>
